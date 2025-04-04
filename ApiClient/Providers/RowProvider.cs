@@ -2,10 +2,11 @@ using System.Text.Json;
 using ApiClient.Models;
 using ApiClient.Models.Database;
 using ApiClient.Models.Database.Rows;
+using ApiClient.Providers.Interfaces;
 
 namespace ApiClient.Providers;
 
-public class RowProvider(string url, string token) : Provider(url, token)
+internal class RowProvider(string url, string token) : Provider(url, token), IRowProvider
 {
     public async Task<List<DatabaseRowId>> GetRowsIdAsync(string workspaceId, string databaseId)
     {

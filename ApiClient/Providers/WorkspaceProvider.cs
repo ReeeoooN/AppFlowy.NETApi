@@ -1,12 +1,12 @@
 using System.Text.Json;
 using ApiClient.Models;
 using ApiClient.Models.Workspace;
+using ApiClient.Providers.Interfaces;
 
 namespace ApiClient.Providers;
 
-public class WorkspaceProvider(string url, string token) : Provider(url, token)  
+internal class WorkspaceProvider(string url, string token) : Provider(url, token), IWorkspaceProvider
 {
-    public FolderProvider Folders = new FolderProvider(url, token);
     public async Task<List<Workspace>> GetAsync()
     {
         using var httpClient = new HttpClient(); 

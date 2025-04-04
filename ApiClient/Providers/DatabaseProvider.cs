@@ -1,15 +1,15 @@
 using ApiClient.Models;
 using ApiClient.Models.Database;
 using ApiClient.Models.Database.Rows;
+using ApiClient.Providers.Interfaces;
 using Newtonsoft.Json;
 using JsonException = System.Text.Json.JsonException;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ApiClient.Providers;
 
-public class DatabaseProvider(string url, string token) : Provider(url, token)
+internal class DatabaseProvider(string url, string token) : Provider(url, token), IDatabaseProvider
 {
-    public RowProvider Rows = new(url, token);
     public async Task<List<Database>> GetAsync( string workspaceId)
     {
         using var client = new HttpClient();

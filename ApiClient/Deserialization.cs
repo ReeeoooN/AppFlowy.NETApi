@@ -1,4 +1,5 @@
 using System.Text.Json;
+using ApiClient.AppFlowyException;
 using ApiClient.Models;
 
 namespace ApiClient;
@@ -11,7 +12,7 @@ public class Deserialization
         {
             if (response.IsSuccessStatusCode)
             {
-                var result = await response.Content.ReadAsStringAsync();
+                var result = await response.Content.ReadAsByteArrayAsync();
                 var DTO = JsonSerializer.Deserialize<ResponseObject<T>>(result);
                 if (DTO.code == 0)
                 {
@@ -20,10 +21,10 @@ public class Deserialization
                         return DTO.data;
                     }
 
-                    throw new NullReferenceException("Null response");
+                    throw new NullObjectException("Null response");
                 }
 
-                throw new HttpRequestException($"Error from server {DTO.message}");
+                throw new ServerErrorException($"Error {DTO.code} from server: {DTO.message}");
             }
 
             throw new HttpRequestException(

@@ -1,9 +1,12 @@
 using ApiClient.Providers;
+using ApiClient.Providers.Interfaces;
 
 namespace ApiClient;
 
-public class AppFlowyManager(string url, string token) : Provider(url , token)
+public class AppFlowyManager(string url, string token)
 {
-    public WorkspaceProvider Workspaces = new WorkspaceProvider(url, token);
-    public DatabaseProvider Databases = new DatabaseProvider(url, token);
+    public IWorkspaceProvider Workspaces = new WorkspaceProvider(url, token);
+    public IDatabaseProvider Databases = new DatabaseProvider(url, token);
+    public IFolderProvider Folders = new FolderProvider(url, token);
+    public IRowProvider Rows = new RowProvider(url, token);
 }

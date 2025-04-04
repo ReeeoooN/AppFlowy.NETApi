@@ -20,7 +20,7 @@ public class Tests
     [Test]
     public async Task FolderTest()
     {
-        var folder = appFlowyManager.Workspaces.Folders.GetAsync(envModel.Wokspace);
+        var folder = appFlowyManager.Folders.GetAsync(envModel.Wokspace);
         Assert.That(folder, Is.Not.Null, "Folder was null");
     }
 
@@ -34,8 +34,8 @@ public class Tests
     [Test]
     public async Task RowTest()
     {
-        var rowids = await appFlowyManager.Databases.Rows.GetRowsIdAsync(envModel.Wokspace, envModel.Database);
-        var rows = await appFlowyManager.Databases.Rows.GetAsync<TestCells>(envModel.Wokspace, envModel.Database, rowids);
+        var rowids = await appFlowyManager.Rows.GetRowsIdAsync(envModel.Wokspace, envModel.Database);
+        var rows = await appFlowyManager.Rows.GetAsync<TestCells>(envModel.Wokspace, envModel.Database, rowids);
         Assert.That(rows, Is.Not.Null, "Rows was null");
     }
 }
