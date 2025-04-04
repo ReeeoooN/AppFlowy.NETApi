@@ -52,5 +52,4 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
-ApiTest/
-ApiTest.csproj
+TestEnv.json
